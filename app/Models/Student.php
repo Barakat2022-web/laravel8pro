@@ -11,11 +11,11 @@ class Student extends Model
 {
     use HasFactory;
     
-    protected $fillable=['name','email','phone','profileimage'];
+    protected $fillable=['name','email','phone'];
 
     public static function getStudent()
     {
-        $reports=DB::table('students')->select('id','name','email','phone')->get()->toArray();
+        $reports=DB::table('students')->select('id','name','email','phone','created_at','updated_at')->get()->toArray();
 
         return $reports;
     }

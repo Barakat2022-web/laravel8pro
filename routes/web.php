@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Ajax\StudentController as AjaxStudentController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\EditorController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\FluentController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\MailController;
@@ -11,7 +13,8 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeContoller;
- use Illuminate\Support\Facades\App;
+use App\Http\Controllers\ZipController;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -143,3 +146,17 @@ Route::get('contact-us',[ContactController::class,'contact']);
 Route::post('send-message',[ContactController::class,'sendEmail'])->name('contact.send');
 
 Route::get('get-name',[ContactController::class,'getFirstLastName']);
+
+Route::get('zip',[ZipController::class,'zipFile']);
+
+Route::get('employee',[EmployeeController::class,'index']);
+
+/*  Ajax Route*/
+Route::prefix('ajax')->group(function(){
+    Route::get('student',[AjaxStudentController::class,'index']);
+    
+});
+
+/**Ajax Route */
+Route::get('student',[AjaxStudentController::class,'index'])->name('student.index');
+Route::post('add-student',[AjaxStudentController::class,'AddStudent'])->name('student.add');
